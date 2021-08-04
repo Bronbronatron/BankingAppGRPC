@@ -17,10 +17,14 @@ public class BankingAppService extends BudgetImplBase {
 
 	Random rand = new Random();
 	
-	double EatingOut = Math.floor(Math.random() * (200 - 10) + 10) / 10;
-	double Groceries = Math.floor(Math.random() * (200 - 10) + 10) / 10;
-	double Other = Math.floor(Math.random() * (200 - 10) - 10) / 10;
-	double Clothes = Math.floor(Math.random() * (200 - 10) - 10) / 10;
+	//pick random number between 20 and 200, round to 2 decimal places
+	//Example:
+	// (.3621*180) = 65.178 + 20 =85.178 *100 = 8517.8(math.round) 8518/100 = 85.18
+	
+	double EatingOut = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
+	double Groceries = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
+	double Other = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
+	double Clothes = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
 
 	@Override
 	public void getBudgetWarning(moneySpent request, StreamObserver<lowBudgetAlert> responseObserver) {
