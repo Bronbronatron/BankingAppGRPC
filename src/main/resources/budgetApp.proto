@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option java_package = "com.bron.grpc";
+option java_multiple_files = true;
+
+service Budget{
+
+rpc getBudgetWarning(moneySpent) returns (lowBudgetAlert) {}
+rpc getRemainingBudget (requestRemainingbudget) returns (stream remainingBudgetStream){}
+rpc updateBugdet(stream updatedBudget) returns (updatedBudgetConfirmation){}
+rpc SetBudget(stream setBudget) returns (stream setBudget){}
+}
+
+
+//rpc 1: getBudgetWarning
+message moneySpent{
+	string catagoryName = 1;
+	double cost = 2;
+}
+
+message lowBudgetAlert{
+	string nearingBudgetAlert = 1;
+}
+
+
+//rpc 2: getRemainingBudget
+
+message requestRemainingbudget{
+bool requestRemainingbudget = 1;
+}
+
+//it
+message remainingBudgetStream{
+    double Budget= 1;
+	string Cat = 2;
+  }
+
+//rpc 3: updateBugdet
+message updatedBudget{
+	string youHaveUpdated = 1;
+	int32 updatedBudget = 2;
+}
+
+message updatedBudgetConfirmation{
+	string Cat = 1;
+}
+
+//rpc 4: setBugdet
+message setBudget {
+string OriginalCat = 1;
+double OriginalBudget = 2;
+}

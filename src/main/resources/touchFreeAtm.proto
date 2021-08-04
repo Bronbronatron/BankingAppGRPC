@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.bron.grpc";
+option java_multiple_files = true;
+
+
+service touchFreeATM{
+rpc authenticateCard (inputPin) returns (authenticationMessage) {}
+}
+
+//rpc 1: authenticateCard
+message authenticationMessage{
+	bool isCorrectPin = 1;
+	string welcomeMessage = 2;
+}
+
+message inputPin{
+	int32 pinNumber = 1;
+}
