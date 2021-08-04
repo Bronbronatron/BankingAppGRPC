@@ -1,9 +1,13 @@
 package com.bron.grpc;
 
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
+import javax.jmdns.ServiceInfo;
+
 import com.bron.grpc.BudgetGrpc.BudgetBlockingStub;
+
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -12,6 +16,19 @@ import io.grpc.stub.StreamObserver;
 public class MyClient {
 
 	public static void main(String[] args) {
+		
+		
+	//	ServiceInfo serviceInfo;
+	//	String service_type = "_grpc._tcp.local.";
+		
+		//Now retrieve the service info - all we are supplying is the service type
+	//	serviceInfo = SimpleServiceDiscovery.run(service_type);
+		
+		//Use the serviceInfo to retrieve the port
+	//	int port = serviceInfo.getPort();
+	//	String host = "localHost";
+		//int port = 9097;
+		
 
 		MyClient main = new MyClient();
 
@@ -22,14 +39,17 @@ public class MyClient {
 
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("LocalHost", 9097).usePlaintext().build();
 
-		// doUnaryCall(channel);
-		 doServerStreamingCall(channel);
+		 doUnaryCall(channel);
+		// doServerStreamingCall(channel);
 		// doClientStreamingCall(channel);
 	    // doBiDiStreamingCall(channel);
 		//channel.shutdown();
 
 	}
 
+	
+	
+	
 	private void doClientStreamingCall(ManagedChannel channel) {
 
 		BudgetGrpc.BudgetStub asyncClient = BudgetGrpc.newStub(channel);
