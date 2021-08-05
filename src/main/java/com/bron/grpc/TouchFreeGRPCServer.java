@@ -15,16 +15,15 @@ public class TouchFreeGRPCServer{
 	
 	public static void main(String[] args) throws IOException {
 		
-		
 		int port = 9098;
-		String service_type_2 = "_grpc._tcp.local.2";
-		String service_name_2 = "GrpcServer2";
+		String service_type = "_grpc._tcp.local.2";
+		String service_name = "GrpcServer2";
 		SimpleServiceRegistration ssr2 = new SimpleServiceRegistration();
-		ssr2.run(port, service_type_2, service_name_2);
-		
+		ssr2.run(port, service_type, service_name);
+	
 		try {
 		
-		Server TouchFreeServer = ServerBuilder.forPort(9098).addService(new TouchFreeService()).build();
+		Server TouchFreeServer = ServerBuilder.forPort(port).addService(new TouchFreeService()).build();
 		
 		TouchFreeServer.start();
 		System.out.println("Server started at " + TouchFreeServer.getPort());

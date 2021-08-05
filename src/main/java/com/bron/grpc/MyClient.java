@@ -1,6 +1,5 @@
 package com.bron.grpc;
 
-
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
@@ -8,7 +7,7 @@ import javax.jmdns.ServiceInfo;
 
 import com.bron.grpc.BudgetGrpc.BudgetBlockingStub;
 
-
+import JMDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -16,40 +15,45 @@ import io.grpc.stub.StreamObserver;
 public class MyClient {
 
 	public static void main(String[] args) {
-		
-		
-	//	ServiceInfo serviceInfo;
-	//	String service_type = "_grpc._tcp.local.";
-		
-		//Now retrieve the service info - all we are supplying is the service type
-	//	serviceInfo = SimpleServiceDiscovery.run(service_type);
-		
-		//Use the serviceInfo to retrieve the port
-	//	int port = serviceInfo.getPort();
-	//	String host = "localHost";
-		//int port = 9097;
-		
+
+		ServiceInfo serviceInfo;
+
+		// must correspond to server file
+		String service_type = "_grpc._tcp.local.";
+
+		// Get the service info by supplying service type
+
+		serviceInfo = SimpleServiceDiscovery.run(service_type);
+
+		// Get port using serviceInfo
+		int port = serviceInfo.getPort();
+		String host = "LocalHost";
+		// int port = 9097;
 
 		MyClient main = new MyClient();
-
-		main.run();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+	//	main.run();
+	//	main.doUnaryCall(channel);
+	    //doBiDiStreamingCall(channel);
+		main.doServerStreamingCall(channel);
+		//main.doClientStreamingCall(channel);
+		 channel.shutdown();
 	}
 
-	private void run() {
+	
+	
+	//private void run() {
 
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("LocalHost", 9097).usePlaintext().build();
+		
 
-		 doUnaryCall(channel);
+	    //  doUnaryCall(channel);
 		// doServerStreamingCall(channel);
-		// doClientStreamingCall(channel);
-	    // doBiDiStreamingCall(channel);
-		//channel.shutdown();
+		//   doClientStreamingCall(channel);
+		// doBiDiStreamingCall(channel);
+	//	 channel.shutdown();
 
-	}
+//	}
 
-	
-	
-	
 	private void doClientStreamingCall(ManagedChannel channel) {
 
 		BudgetGrpc.BudgetStub asyncClient = BudgetGrpc.newStub(channel);
@@ -101,37 +105,30 @@ public class MyClient {
 		}
 
 	}
-	
-	
-	
 
 	private void doServerStreamingCall(ManagedChannel channel) {
 
 		BudgetGrpc.BudgetBlockingStub BudgetStub = BudgetGrpc.newBlockingStub(channel);
-		
-		
+
 		requestRemainingbudget Remainingbudget = requestRemainingbudget.newBuilder().setRequestRemainingbudget(true)
 				.build();
-		
+
 		BudgetStub.getRemainingBudget(Remainingbudget).forEachRemaining(remainingBudgetStream -> {
-			 
-			System.out.println(remainingBudgetStream.getCat() + " Budget: " + remainingBudgetStream.getBudget()); 
-			
-			
+
+			System.out.println(remainingBudgetStream.getCat() + " Budget: " + remainingBudgetStream.getBudget());
+
 		});
-			channel.shutdown();
-	
-	
+		channel.shutdown();
+
 	}
 
-	
-	
-
 	private void doUnaryCall(ManagedChannel channel) {
+		
+		String CatagoryName = "EatingOut";
 
 		BudgetGrpc.BudgetBlockingStub BudgetStub = BudgetGrpc.newBlockingStub(channel);
 
-		moneySpent moneyspent = moneySpent.newBuilder().setCatagoryName("EatingOut").setCost(5).build();
+		moneySpent moneyspent = moneySpent.newBuilder().setCatagoryName(CatagoryName).setCost(5).build();
 
 		// call rpc and get back a response
 		lowBudgetAlert budgetalert = BudgetStub.getBudgetWarning(moneyspent);
@@ -151,7 +148,8 @@ public class MyClient {
 		StreamObserver<setBudget> responseObserver = new StreamObserver<setBudget>() {
 			@Override
 			public void onNext(setBudget value) {
-				System.out.println("Response from server" + value.getOriginalCat() + value.getOriginalBudget());
+				
+				System.out.println("You Have set Budget!" + " \n Catagory: "   + value.getOriginalCat() + "- Budget: " +  value.getOriginalBudget());
 
 			}
 

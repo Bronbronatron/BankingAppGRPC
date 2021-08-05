@@ -24,6 +24,16 @@ public final class TouchFreeAtm {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_inputPin_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_searchATM_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_searchATM_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_availableMachines_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_availableMachines_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -36,9 +46,13 @@ public final class TouchFreeAtm {
       "\n\022touchFreeAtm.proto\"E\n\025authenticationMe" +
       "ssage\022\024\n\014isCorrectPin\030\001 \001(\010\022\026\n\016welcomeMe" +
       "ssage\030\002 \001(\t\"\035\n\010inputPin\022\021\n\tpinNumber\030\001 \001" +
-      "(\0052G\n\014touchFreeATM\0227\n\020authenticateCard\022\t" +
-      ".inputPin\032\026.authenticationMessage\"\000B\021\n\rc" +
-      "om.bron.grpcP\001b\006proto3"
+      "(\005\"\036\n\tsearchATM\022\021\n\tsearchATM\030\001 \001(\010\"6\n\021av" +
+      "ailableMachines\022\017\n\007Machine\030\001 \001(\t\022\020\n\010dist" +
+      "ance\030\002 \001(\0022|\n\014touchFreeATM\0227\n\020authentica" +
+      "teCard\022\t.inputPin\032\026.authenticationMessag" +
+      "e\"\000\0223\n\rfindNearByATM\022\n.searchATM\032\022.avail" +
+      "ableMachines\"\0000\001B\021\n\rcom.bron.grpcP\001b\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -64,6 +78,18 @@ public final class TouchFreeAtm {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_inputPin_descriptor,
         new java.lang.String[] { "PinNumber", });
+    internal_static_searchATM_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_searchATM_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_searchATM_descriptor,
+        new java.lang.String[] { "SearchATM", });
+    internal_static_availableMachines_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_availableMachines_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_availableMachines_descriptor,
+        new java.lang.String[] { "Machine", "Distance", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

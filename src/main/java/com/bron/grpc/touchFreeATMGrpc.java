@@ -59,6 +59,38 @@ public final class touchFreeATMGrpc {
      return getAuthenticateCardMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.bron.grpc.searchATM,
+      com.bron.grpc.availableMachines> getFindNearByATMMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "findNearByATM",
+      requestType = com.bron.grpc.searchATM.class,
+      responseType = com.bron.grpc.availableMachines.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.bron.grpc.searchATM,
+      com.bron.grpc.availableMachines> getFindNearByATMMethod() {
+    io.grpc.MethodDescriptor<com.bron.grpc.searchATM, com.bron.grpc.availableMachines> getFindNearByATMMethod;
+    if ((getFindNearByATMMethod = touchFreeATMGrpc.getFindNearByATMMethod) == null) {
+      synchronized (touchFreeATMGrpc.class) {
+        if ((getFindNearByATMMethod = touchFreeATMGrpc.getFindNearByATMMethod) == null) {
+          touchFreeATMGrpc.getFindNearByATMMethod = getFindNearByATMMethod = 
+              io.grpc.MethodDescriptor.<com.bron.grpc.searchATM, com.bron.grpc.availableMachines>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "touchFreeATM", "findNearByATM"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.bron.grpc.searchATM.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.bron.grpc.availableMachines.getDefaultInstance()))
+                  .setSchemaDescriptor(new touchFreeATMMethodDescriptorSupplier("findNearByATM"))
+                  .build();
+          }
+        }
+     }
+     return getFindNearByATMMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -93,6 +125,13 @@ public final class touchFreeATMGrpc {
       asyncUnimplementedUnaryCall(getAuthenticateCardMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void findNearByATM(com.bron.grpc.searchATM request,
+        io.grpc.stub.StreamObserver<com.bron.grpc.availableMachines> responseObserver) {
+      asyncUnimplementedUnaryCall(getFindNearByATMMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -102,6 +141,13 @@ public final class touchFreeATMGrpc {
                 com.bron.grpc.inputPin,
                 com.bron.grpc.authenticationMessage>(
                   this, METHODID_AUTHENTICATE_CARD)))
+          .addMethod(
+            getFindNearByATMMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                com.bron.grpc.searchATM,
+                com.bron.grpc.availableMachines>(
+                  this, METHODID_FIND_NEAR_BY_ATM)))
           .build();
     }
   }
@@ -131,6 +177,14 @@ public final class touchFreeATMGrpc {
       asyncUnaryCall(
           getChannel().newCall(getAuthenticateCardMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findNearByATM(com.bron.grpc.searchATM request,
+        io.grpc.stub.StreamObserver<com.bron.grpc.availableMachines> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getFindNearByATMMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -156,6 +210,14 @@ public final class touchFreeATMGrpc {
     public com.bron.grpc.authenticationMessage authenticateCard(com.bron.grpc.inputPin request) {
       return blockingUnaryCall(
           getChannel(), getAuthenticateCardMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.bron.grpc.availableMachines> findNearByATM(
+        com.bron.grpc.searchATM request) {
+      return blockingServerStreamingCall(
+          getChannel(), getFindNearByATMMethod(), getCallOptions(), request);
     }
   }
 
@@ -187,6 +249,7 @@ public final class touchFreeATMGrpc {
   }
 
   private static final int METHODID_AUTHENTICATE_CARD = 0;
+  private static final int METHODID_FIND_NEAR_BY_ATM = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -208,6 +271,10 @@ public final class touchFreeATMGrpc {
         case METHODID_AUTHENTICATE_CARD:
           serviceImpl.authenticateCard((com.bron.grpc.inputPin) request,
               (io.grpc.stub.StreamObserver<com.bron.grpc.authenticationMessage>) responseObserver);
+          break;
+        case METHODID_FIND_NEAR_BY_ATM:
+          serviceImpl.findNearByATM((com.bron.grpc.searchATM) request,
+              (io.grpc.stub.StreamObserver<com.bron.grpc.availableMachines>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -271,6 +338,7 @@ public final class touchFreeATMGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new touchFreeATMFileDescriptorSupplier())
               .addMethod(getAuthenticateCardMethod())
+              .addMethod(getFindNearByATMMethod())
               .build();
         }
       }

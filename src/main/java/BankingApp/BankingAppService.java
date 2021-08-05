@@ -32,45 +32,54 @@ public class BankingAppService extends BudgetImplBase {
 		String serviceType = request.getCatagoryName();
 		double moneySpent = request.getCost();
 		lowBudgetAlert.Builder lowBudget = lowBudgetAlert.newBuilder();
-
+		
+		//If service type inputed = EatingOut, update eatingOut budget 
 		if (serviceType.equalsIgnoreCase("EatingOut")) {
 			EatingOut = EatingOut - moneySpent;
+			//If EatingOut goes below a certain value, show warning message
 			if (EatingOut < 20.0) {
 				lowBudget.setNearingBudgetAlert("You have less than €20 left in EatingOut budget");
 				responseObserver.onNext(lowBudget.build());
+			//Else no nothing
 			} else {
 				return;
 			}
 		}
-
+		//Else if service type inputed = Groceries, update Groceries budget 
 		else if (serviceType.equalsIgnoreCase("Groceries")) {
 			Groceries = Groceries - moneySpent;
 			if (Groceries < 20.0) {
+				//If Groceries bugdet goes below a certain value, show warning message
 				lowBudget.setNearingBudgetAlert("You have less than €20 left in Groceries budget");
 				responseObserver.onNext(lowBudget.build());
+				//Else no nothing
 			} else {
 				return;
 			}
 		}
-
+		//Else if service type  = Clothes, update Clothes budget 
 		else if (serviceType.equalsIgnoreCase("Clothes")) {
 			Clothes = Clothes - moneySpent;
+			//If Clothes budget goes below a certain value, show warning message
 			if (Clothes < 20.0) {
 				lowBudget.setNearingBudgetAlert("You have less than €20 left in Clothes budget");
 				responseObserver.onNext(lowBudget.build());
 			}
-
+			//else do nothing
 			else {
 				return;
 			}
 	}
 
 		else {
+			//if Service Type inputed = anything else update budget for "Other"
 			Other = Other - moneySpent;
+			//If Other budget goes below a certain value, show warning message
 			if (Other < 20.0) {
 				lowBudget.setNearingBudgetAlert("You have less than €20 left in Other budget");
 				responseObserver.onNext(lowBudget.build());
 			} else {
+				//else no nothing
 					return;
 					
 				}
@@ -85,9 +94,11 @@ public class BankingAppService extends BudgetImplBase {
 	public void getRemainingBudget(requestRemainingbudget request,
 			StreamObserver<remainingBudgetStream> responseObserver) {
 		boolean requestRemainingBudget = request.getRequestRemainingbudget();
-
+		//if user presses 'Request Remaining Budget
 		if (requestRemainingBudget == true) {
 
+			
+		//Message 1
 			remainingBudgetStream reply1 = remainingBudgetStream.newBuilder().setCat("EatingOut").setBudget(EatingOut)
 					.build();
 			
@@ -100,7 +111,7 @@ public class BankingAppService extends BudgetImplBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			//Message 2
 			remainingBudgetStream reply2 = remainingBudgetStream.newBuilder().setCat("Groceries").setBudget(Groceries)
 					.build();
 			
@@ -113,7 +124,8 @@ public class BankingAppService extends BudgetImplBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
+			//Message 3
 			remainingBudgetStream reply3 = remainingBudgetStream.newBuilder().setCat("Clothes").setBudget(Clothes).build();
 			responseObserver.onNext(reply3);
 			
@@ -124,7 +136,8 @@ public class BankingAppService extends BudgetImplBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
+			//Message 4
 			remainingBudgetStream reply4 = remainingBudgetStream.newBuilder().setCat("Other").setBudget(Other).build();
 			responseObserver.onNext(reply4);
 			try {
@@ -136,6 +149,7 @@ public class BankingAppService extends BudgetImplBase {
 			}
 
 		}
+		//End Stream
 		responseObserver.onCompleted();
 	}
 

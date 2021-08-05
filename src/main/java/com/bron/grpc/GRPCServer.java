@@ -23,7 +23,7 @@ public class GRPCServer {
 
 		
 	try {
-	Server server = ServerBuilder.forPort(9097).addService(new BankingAppService()).build(); 
+	Server server = ServerBuilder.forPort(port).addService(new BankingAppService()).build(); 
 	
 	server.start();
 	
@@ -31,6 +31,7 @@ public class GRPCServer {
 	
 	server.awaitTermination();
 	
+	//if error
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
