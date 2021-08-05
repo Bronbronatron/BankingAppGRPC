@@ -13,7 +13,7 @@ public class TouchFreeClient {
 		ServiceInfo serviceInfo;
 
 		// must correspond to server file
-		String service_type_2 = "_grpc._tcp.local.2";
+		String service_type_2 = "_grpc._tcp.local.TouchFree.";
 
 		// Get the service info by supplying service type
 		serviceInfo = SimpleServiceDiscovery.run(service_type_2);
@@ -21,7 +21,7 @@ public class TouchFreeClient {
 		// Use the serviceInfo to retrieve the port
 		int port_2 = serviceInfo.getPort();
 
-		String host_2 = "LocalHost2";
+		String host_2 = "LocalHost";
 		// int port = 9098;
 
 		TouchFreeClient touch = new TouchFreeClient();

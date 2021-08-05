@@ -24,7 +24,6 @@ public class MyClient {
 		// Get the service info by supplying service type
 
 		serviceInfo = SimpleServiceDiscovery.run(service_type);
-
 		// Get port using serviceInfo
 		int port = serviceInfo.getPort();
 		String host = "LocalHost";
@@ -33,6 +32,7 @@ public class MyClient {
 		MyClient main = new MyClient();
 		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 	//	main.run();
+		
 	//	main.doUnaryCall(channel);
 	    //doBiDiStreamingCall(channel);
 		main.doServerStreamingCall(channel);
