@@ -183,6 +183,9 @@ public final class BudgetGrpc {
   public static abstract class BudgetImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public void getBudgetWarning(com.bron.grpc.moneySpent request,
         io.grpc.stub.StreamObserver<com.bron.grpc.lowBudgetAlert> responseObserver) {
@@ -190,6 +193,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public void getRemainingBudget(com.bron.grpc.requestRemainingbudget request,
         io.grpc.stub.StreamObserver<com.bron.grpc.remainingBudgetStream> responseObserver) {
@@ -197,6 +203,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Client Streaming- stream of requests, one response
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.bron.grpc.updatedBudget> updateBugdet(
         io.grpc.stub.StreamObserver<com.bron.grpc.updatedBudgetConfirmation> responseObserver) {
@@ -204,6 +213,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Bidirectional Streaming- stream of requests, stream of responses
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.bron.grpc.setBudget> setBudget(
         io.grpc.stub.StreamObserver<com.bron.grpc.setBudget> responseObserver) {
@@ -263,6 +275,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public void getBudgetWarning(com.bron.grpc.moneySpent request,
         io.grpc.stub.StreamObserver<com.bron.grpc.lowBudgetAlert> responseObserver) {
@@ -271,6 +286,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public void getRemainingBudget(com.bron.grpc.requestRemainingbudget request,
         io.grpc.stub.StreamObserver<com.bron.grpc.remainingBudgetStream> responseObserver) {
@@ -279,6 +297,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Client Streaming- stream of requests, one response
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.bron.grpc.updatedBudget> updateBugdet(
         io.grpc.stub.StreamObserver<com.bron.grpc.updatedBudgetConfirmation> responseObserver) {
@@ -287,6 +308,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Bidirectional Streaming- stream of requests, stream of responses
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.bron.grpc.setBudget> setBudget(
         io.grpc.stub.StreamObserver<com.bron.grpc.setBudget> responseObserver) {
@@ -314,6 +338,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public com.bron.grpc.lowBudgetAlert getBudgetWarning(com.bron.grpc.moneySpent request) {
       return blockingUnaryCall(
@@ -321,6 +348,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public java.util.Iterator<com.bron.grpc.remainingBudgetStream> getRemainingBudget(
         com.bron.grpc.requestRemainingbudget request) {
@@ -348,6 +378,9 @@ public final class BudgetGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.bron.grpc.lowBudgetAlert> getBudgetWarning(
         com.bron.grpc.moneySpent request) {

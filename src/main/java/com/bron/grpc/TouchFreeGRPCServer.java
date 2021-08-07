@@ -16,7 +16,7 @@ public class TouchFreeGRPCServer{
 	public static void main(String[] args) throws IOException {
 		
 		
-		TouchFreeGRPCServer touchServer = new TouchFreeGRPCServer(); 
+	//	TouchFreeGRPCServer touchServer = new TouchFreeGRPCServer(); 
 		int port_2 = 9098;
 		String service_type_2 = "_grpc._tcp.local.TouchFree.";
 		String service_name_2 = "GrpcServer2";
@@ -24,21 +24,25 @@ public class TouchFreeGRPCServer{
 		ssr2.run(port_2, service_type_2, service_name_2);
 		
 		try {
-		
+			
+		//build service with the given port and add a service
 		Server TouchFreeServer = ServerBuilder.forPort(port_2 ).addService(new TouchFreeService()).build();
 		
+		//start server
 		TouchFreeServer.start();
 		System.out.println("Server started at " + TouchFreeServer.getPort());
 		
+
+		//make sure programme does not terminate
 		TouchFreeServer.awaitTermination();
 
 		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	    

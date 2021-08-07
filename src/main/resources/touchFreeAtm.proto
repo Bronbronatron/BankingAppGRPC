@@ -5,8 +5,10 @@ option java_multiple_files = true;
 
 
 service touchFreeATM{
+//unary- one request one response
 rpc authenticateCard (inputPin) returns (authenticationMessage) {}
 
+//Server streaming- one request stream of responses
 rpc findNearByATM (searchATM) returns (stream availableMachines) {}
 }
 
@@ -20,7 +22,7 @@ message inputPin{
 	int32 pinNumber = 1;
 }
 
-//rpc 2: authenticateCard
+//rpc 2: findNearByATM
 message searchATM{
 	bool searchATM = 1;
 }

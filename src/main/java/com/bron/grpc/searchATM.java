@@ -5,7 +5,7 @@ package com.bron.grpc;
 
 /**
  * <pre>
- *rpc 2: authenticateCard
+ *rpc 2: findNearByATM
  * </pre>
  *
  * Protobuf type {@code searchATM}
@@ -252,7 +252,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *rpc 2: authenticateCard
+   *rpc 2: findNearByATM
    * </pre>
    *
    * Protobuf type {@code searchATM}

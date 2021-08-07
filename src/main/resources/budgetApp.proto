@@ -5,9 +5,14 @@ option java_multiple_files = true;
 
 service Budget{
 
+//unary- one request one response
 rpc getBudgetWarning(moneySpent) returns (lowBudgetAlert) {}
+
+//Server streaming- one request stream of responses
 rpc getRemainingBudget (requestRemainingbudget) returns (stream remainingBudgetStream){}
+//Client Streaming- stream of requests, one response
 rpc updateBugdet(stream updatedBudget) returns (updatedBudgetConfirmation){}
+//Bidirectional Streaming- stream of requests, stream of responses
 rpc SetBudget(stream setBudget) returns (stream setBudget){}
 }
 

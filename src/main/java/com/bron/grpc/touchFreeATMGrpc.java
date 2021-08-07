@@ -119,6 +119,9 @@ public final class touchFreeATMGrpc {
   public static abstract class touchFreeATMImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public void authenticateCard(com.bron.grpc.inputPin request,
         io.grpc.stub.StreamObserver<com.bron.grpc.authenticationMessage> responseObserver) {
@@ -126,6 +129,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public void findNearByATM(com.bron.grpc.searchATM request,
         io.grpc.stub.StreamObserver<com.bron.grpc.availableMachines> responseObserver) {
@@ -171,6 +177,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public void authenticateCard(com.bron.grpc.inputPin request,
         io.grpc.stub.StreamObserver<com.bron.grpc.authenticationMessage> responseObserver) {
@@ -179,6 +188,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public void findNearByATM(com.bron.grpc.searchATM request,
         io.grpc.stub.StreamObserver<com.bron.grpc.availableMachines> responseObserver) {
@@ -206,6 +218,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public com.bron.grpc.authenticationMessage authenticateCard(com.bron.grpc.inputPin request) {
       return blockingUnaryCall(
@@ -213,6 +228,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *Server streaming- one request stream of responses
+     * </pre>
      */
     public java.util.Iterator<com.bron.grpc.availableMachines> findNearByATM(
         com.bron.grpc.searchATM request) {
@@ -240,6 +258,9 @@ public final class touchFreeATMGrpc {
     }
 
     /**
+     * <pre>
+     *unary- one request one response
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.bron.grpc.authenticationMessage> authenticateCard(
         com.bron.grpc.inputPin request) {

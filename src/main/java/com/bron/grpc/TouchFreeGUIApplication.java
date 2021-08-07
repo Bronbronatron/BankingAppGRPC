@@ -42,8 +42,8 @@ touchFreeATMBlockingStub TouchFreeStub;
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						TouchFreeGUIApplication window = new TouchFreeGUIApplication();
-						window.frame.setVisible(true);
+						TouchFreeGUIApplication windowTouch = new TouchFreeGUIApplication();
+						windowTouch.frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -55,7 +55,7 @@ touchFreeATMBlockingStub TouchFreeStub;
 	public TouchFreeGUIApplication() {
 				
 				
-				int port = 9097;
+				int port = 9098;
 				String host = "LocalHost";
 		;
 			
@@ -134,7 +134,10 @@ touchFreeATMBlockingStub TouchFreeStub;
 
 						// call rpc and get back a response
 						authenticationMessage message = TouchFreeStub.authenticateCard(pin);
-
+						
+						//populate the JtextArea in the panel
+						textResponse.append(message.getWelcomeMessage());
+						
 						// print the result
 						System.out.println(message.getWelcomeMessage());
 				

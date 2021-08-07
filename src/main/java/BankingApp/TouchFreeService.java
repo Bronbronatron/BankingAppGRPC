@@ -21,7 +21,7 @@ public class TouchFreeService extends touchFreeATMImplBase {
 		authenticationMessage.Builder auth = authenticationMessage.newBuilder();
 		
 		if (pin == realPin) {
-			
+			//set the isCorrectPin and welcomeMessage
 			auth.setIsCorrectPin(true).setWelcomeMessage("Welcome!");
 			
 		}	
@@ -30,8 +30,10 @@ public class TouchFreeService extends touchFreeATMImplBase {
 			
 			auth.setIsCorrectPin(false).setWelcomeMessage("Invalid Pin");		
 		}
-		
+		//build response 
 		responseObserver.onNext(auth.build());
+		
+		//complete rpc call
 		responseObserver.onCompleted();
 	}
 
@@ -40,35 +42,38 @@ public class TouchFreeService extends touchFreeATMImplBase {
 		boolean Find  = request.getSearchATM();
 		
 		if (Find==true) {
-		
-			//Message 1
+			try {
+		//Set and build message 1
 			availableMachines MachineReply1 = availableMachines.newBuilder().setMachine("AIB").setDistance(1.8f).build();	
 			responseObserver.onNext(MachineReply1);
 
-			try {
+			
 				// wait for a second
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//Message 2
+			
+			try {
+		//Set and build message 2
 			availableMachines MachineReply2 = availableMachines.newBuilder().setMachine("Bank of Ireland").setDistance(0.3f).build();	
 			responseObserver.onNext(MachineReply2);
 			
-			try {
+			
 				// wait for a second
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			try {
 			
-			//Message 3
+			//Set and build message 2
 			availableMachines MachineReply3 = availableMachines.newBuilder().setMachine("Ulster Bank").setDistance(0.1f).build();	
 			responseObserver.onNext(MachineReply3);
 			
-			try {
+			
 				// wait for a second
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

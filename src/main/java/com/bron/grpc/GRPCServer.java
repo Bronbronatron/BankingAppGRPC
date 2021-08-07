@@ -14,7 +14,7 @@ public class GRPCServer {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
-		GRPCServer budgetServer = new GRPCServer(); 
+//		GRPCServer budgetServer = new GRPCServer();   
 		int port = 9097;
 		String service_type = "_grpc._tcp.local.";
 		String service_name = "GrpcServer";
@@ -23,21 +23,24 @@ public class GRPCServer {
 
 		
 	try {
+	//build service with the given port and add a service
 	Server server = ServerBuilder.forPort(port).addService(new BankingAppService()).build(); 
 	
+	//start the server 
 	server.start();
 	
 	System.out.println("Server started at " + server.getPort());
 	
+	
+	//make sure programme does not terminate
 	server.awaitTermination();
 	
 	//if error
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+				e.printStackTrace();
 		
 	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
     

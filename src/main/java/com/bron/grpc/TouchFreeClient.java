@@ -40,9 +40,13 @@ public class TouchFreeClient {
 	}
 
 	private void doTouchFreeUnaryCall(ManagedChannel channel) {
+		
+		
 
+		//generate blocking stub  
 		touchFreeATMGrpc.touchFreeATMBlockingStub TouchFreeStub = touchFreeATMGrpc.newBlockingStub(channel);
 
+		//build request
 		inputPin pin = inputPin.newBuilder().setPinNumber(1111).build();
 
 		// call rpc and get back a response
@@ -55,8 +59,11 @@ public class TouchFreeClient {
 
 	private void doServerStreamingCall(ManagedChannel channel) {
 
+		// generate blocking stub
 		touchFreeATMGrpc.touchFreeATMBlockingStub TouchFreeStub = touchFreeATMGrpc.newBlockingStub(channel);
-
+		
+		
+		//build request
 		searchATM Search = searchATM.newBuilder().setSearchATM(true).build();
 		
 		//For each machine found print name and distance from user
