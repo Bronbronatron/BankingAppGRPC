@@ -118,6 +118,7 @@ public class MyClient {
 			System.out.println(remainingBudgetStream.getCat() + " Budget: " + remainingBudgetStream.getBudget());
 
 		});
+		
 		channel.shutdown();
 
 	}

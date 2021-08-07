@@ -415,14 +415,12 @@ public class NewGUIApplication {
 			panel_service_1.add(B3);
 			panel_service_1.add(B4);
 			
-			textResponse = new JTextArea(12, 34);
+		
 			textResponse = new JTextArea(12, 34);
 			textResponse .setLineWrap(true);
 			textResponse.setWrapStyleWord(true);
 			
 			JScrollPane scrollPane = new JScrollPane(textResponse);
-			
-			//textResponse.setSize(new Dimension(15, 20));
 			panel_service_1.add(scrollPane);
 			
 			
