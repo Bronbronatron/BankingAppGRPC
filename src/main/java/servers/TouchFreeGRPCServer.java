@@ -1,10 +1,10 @@
-package com.bron.grpc;
+package servers;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import BankingApp.TouchFreeService;
 import JMDNS.SimpleServiceRegistration;
+import bankingAppServices.TouchFreeService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

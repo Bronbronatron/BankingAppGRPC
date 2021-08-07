@@ -1,4 +1,4 @@
-package com.bron.grpc;
+package gui;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,12 +19,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.bron.grpc.authenticationMessage;
+import com.bron.grpc.inputPin;
+import com.bron.grpc.searchATM;
+import com.bron.grpc.touchFreeATMGrpc;
 import com.bron.grpc.touchFreeATMGrpc.touchFreeATMBlockingStub;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class TouchFreeGUIApplication {
+public class touchFreeGUIApplication {
 
 	touchFreeATMBlockingStub TouchFreeStub;
 
@@ -38,7 +42,7 @@ public class TouchFreeGUIApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TouchFreeGUIApplication windowTouch = new TouchFreeGUIApplication();
+					touchFreeGUIApplication windowTouch = new touchFreeGUIApplication();
 					windowTouch.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +51,7 @@ public class TouchFreeGUIApplication {
 		});
 	}
 
-	public TouchFreeGUIApplication() {
+	public touchFreeGUIApplication() {
 
 		int port = 9098;
 		String host = "LocalHost";
@@ -139,7 +143,7 @@ public class TouchFreeGUIApplication {
 		// Populate text response area
 		panel_service_1.add(B1);
 		panel_service_1.add(B2);
-		
+
 		textResponse = new JTextArea(6, 34);
 		textResponse.setLineWrap(true);
 		textResponse.setWrapStyleWord(true);

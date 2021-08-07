@@ -1,4 +1,4 @@
-package BankingApp;
+package bankingAppServices;
 
 import com.bron.grpc.BudgetGrpc.BudgetImplBase;
 

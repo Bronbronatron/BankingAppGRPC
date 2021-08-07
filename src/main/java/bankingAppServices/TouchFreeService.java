@@ -1,4 +1,4 @@
-package BankingApp;
+package bankingAppServices;
 
 import com.bron.grpc.authenticationMessage;
 import com.bron.grpc.availableMachines;

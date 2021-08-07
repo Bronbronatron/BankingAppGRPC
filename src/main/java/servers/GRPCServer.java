@@ -1,9 +1,9 @@
-package com.bron.grpc;
+package servers;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import BankingApp.BankingAppService;
+import bankingAppServices.BankingAppService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
