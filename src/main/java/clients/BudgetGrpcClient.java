@@ -39,11 +39,11 @@ public class BudgetGrpcClient {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 		// main.run();
 
-		// main.doUnaryCall(channel);
-		// doBiDiStreamingCall(channel);
-		main.doServerStreamingCall(channel);
+		 main.doUnaryCall(channel);
+		//main.doBiDiStreamingCall(channel);
+		//main.doServerStreamingCall(channel);
 		// main.doClientStreamingCall(channel);
-		channel.shutdown();
+		//.shutdown();
 	}
 
 	private void doClientStreamingCall(ManagedChannel channel) {

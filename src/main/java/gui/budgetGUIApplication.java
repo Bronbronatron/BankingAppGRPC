@@ -183,12 +183,16 @@ public class budgetGUIApplication {
 				// Do some logic with our index or send it over
 				moneySpent moneyspent = moneySpent.newBuilder().setCatagoryName(Cat).setCost(num1).build();
 
+				
 				lowBudgetAlert budgetalert = Stub.getBudgetWarning(moneyspent);
 
+				
+				
 				// populate the JtextArea in the panel
-				textResponse.append(budgetalert.getNearingBudgetAlert());
+				textResponse.append("\n" + budgetalert.getNearingBudgetAlert());
 				// print the result
 				System.out.println(budgetalert.getNearingBudgetAlert());
+				
 
 			}
 
@@ -296,13 +300,13 @@ public class budgetGUIApplication {
 			public void actionPerformed(ActionEvent e) {
 
 				String Cat1 = Catagory1.getText();
-				int num1 = Integer.parseInt(Cost1.getText());
+				double num1 = Double.parseDouble(Cost1.getText());
 				String Cat2 = Catagory2.getText();
-				int num2 = Integer.parseInt(Cost2.getText());
+				double num2 = Double.parseDouble(Cost2.getText());
 				String Cat3 = Catagory3.getText();
-				int num3 = Integer.parseInt(Cost3.getText());
+				double num3 = Double.parseDouble(Cost3.getText());
 				String Cat4 = Catagory4.getText();
-				int num4 = Integer.parseInt(Cost4.getText());
+				double num4 = Double.parseDouble(Cost4.getText());
 
 				// using a CountDownLatch to sleep instead
 				CountDownLatch latch = new CountDownLatch(1);

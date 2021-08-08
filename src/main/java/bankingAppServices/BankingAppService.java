@@ -49,12 +49,13 @@ public class BankingAppService extends BudgetImplBase {
 			if (EatingOut < 20.0) {
 				
 				//set the nearingBudgetAlertMessage
-				lowBudget.setNearingBudgetAlert("You have less than €20 left in EatingOut budget");
+				lowBudget.setNearingBudgetAlert("\n You have less than €20 left in Eating Out budget");
 				//build response and send back to user
 				responseObserver.onNext(lowBudget.build());
 			//Else no nothing
 			} else {
-				return;
+				lowBudget.setNearingBudgetAlert("\n Eating Out budget okay!");
+				responseObserver.onNext(lowBudget.build());
 			}
 		}
 		//Else if service type inputed = Groceries, update Groceries budget 
@@ -64,12 +65,13 @@ public class BankingAppService extends BudgetImplBase {
 				//If Groceries bugdet goes below a certain value, show warning message
 
 				//set the nearingBudgetAlertMessage
-				lowBudget.setNearingBudgetAlert("You have less than €20 left in Groceries budget");
+				lowBudget.setNearingBudgetAlert("\n You have less than €20 left in Groceries budget");
 				//build response and send back to user
 				responseObserver.onNext(lowBudget.build());
 				//Else no nothing
 			} else {
-				return;
+				lowBudget.setNearingBudgetAlert("\n Groceries budget okay!");
+				responseObserver.onNext(lowBudget.build());
 			}
 		}
 		//Else if service type  = Clothes, update Clothes budget 
@@ -77,12 +79,13 @@ public class BankingAppService extends BudgetImplBase {
 			Clothes = Clothes - moneySpent;
 			//If Clothes budget goes below a certain value, show warning message
 			if (Clothes < 20.0) {
-				lowBudget.setNearingBudgetAlert("You have less than €20 left in Clothes budget");
+				lowBudget.setNearingBudgetAlert("\n You have less than €20 left in Clothes budget");
 				responseObserver.onNext(lowBudget.build());
 			}
 			//else do nothing
 			else {
-				return;
+				lowBudget.setNearingBudgetAlert("\nClothes Budget okay!");
+				responseObserver.onNext(lowBudget.build());
 			}
 	}
 
@@ -91,11 +94,12 @@ public class BankingAppService extends BudgetImplBase {
 			Other = Other - moneySpent;
 			//If Other budget goes below a certain value, show warning message
 			if (Other < 20.0) {
-				lowBudget.setNearingBudgetAlert("You have less than €20 left in Other budget");
+				lowBudget.setNearingBudgetAlert("\n You have less than €20 left in Other budget");
 				responseObserver.onNext(lowBudget.build());
 			} else {
 				//else no nothing
-					return;
+				lowBudget.setNearingBudgetAlert("\n Other budget okay!");
+				responseObserver.onNext(lowBudget.build());
 					
 				}
 			}
