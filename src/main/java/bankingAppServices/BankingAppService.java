@@ -27,7 +27,6 @@ public class BankingAppService extends BudgetImplBase {
 	double Other = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
 	double Clothes = Math.round(100*(rand.nextDouble() * 180 + 20))/100;
 	
-	
 	//implement unary rpc
 	//override getBugdetWarning method 
 	@Override
@@ -238,7 +237,7 @@ public class BankingAppService extends BudgetImplBase {
 			@Override
 			public void onNext(com.bron.grpc.setBudget value) {
 				
-				//Every time a set budget message is received, send reponse back
+				//Every time a set budget message is received, send response back
 				
 				//extract value 
 				//Extract the values
@@ -248,7 +247,7 @@ public class BankingAppService extends BudgetImplBase {
 				//if eating out, set Eating out budget to inputed value
 				if (OriginalCat.equalsIgnoreCase("EatingOut")) {
 					EatingOut = OriginalBudget;
-					
+				
 				//if clothes, set clothes budget to inputed value	
 				} else if ((OriginalCat.equalsIgnoreCase("Clothes"))) {
 					Clothes = OriginalBudget;

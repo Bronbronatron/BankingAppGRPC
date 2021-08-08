@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -25,6 +26,7 @@ import com.bron.grpc.searchATM;
 import com.bron.grpc.touchFreeATMGrpc;
 import com.bron.grpc.touchFreeATMGrpc.touchFreeATMBlockingStub;
 
+import JMDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -53,11 +55,20 @@ public class touchFreeGUIApplication {
 
 	public touchFreeGUIApplication() {
 
-		int port = 9098;
-		String host = "LocalHost";
-		;
+		ServiceInfo serviceInfo;
 
-		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+		// must correspond to server file
+		String service_type_2 = "_grpc._tcp.local.TouchFree.";
+
+		// Get the service info by supplying service type
+		serviceInfo = SimpleServiceDiscovery.run(service_type_2);
+
+		// Use the serviceInfo to retrieve the port
+		int port_2 = serviceInfo.getPort();
+
+		String host_2 = "LocalHost";
+
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(host_2, port_2).usePlaintext().build();
 
 		// stubs -- generate from proto
 		TouchFreeStub = touchFreeATMGrpc.newBlockingStub(channel);
@@ -90,8 +101,8 @@ public class touchFreeGUIApplication {
 		panel_service_1.add(InputPin);
 		InputPin.setColumns(10);
 
-		JButton B1 = new JButton("Get Budget Warning");
-		JButton B2 = new JButton("Get remaining Bugdet");
+		JButton B1 = new JButton("Validate Pin");
+		JButton B2 = new JButton("Find ATM");
 
 		// Action Listener is on button
 
@@ -109,7 +120,7 @@ public class touchFreeGUIApplication {
 				authenticationMessage message = TouchFreeStub.authenticateCard(pin);
 
 				// populate the JtextArea in the panel
-				textResponse.append(message.getWelcomeMessage());
+				textResponse.append("\n" + message.getWelcomeMessage());
 
 				// print the result
 				System.out.println(message.getWelcomeMessage());
@@ -128,7 +139,7 @@ public class touchFreeGUIApplication {
 				// For each machine found print name and distance from user
 				TouchFreeStub.findNearByATM(Search).forEachRemaining(availableMachines -> {
 
-					textResponse.append("ATM name: " + availableMachines.getMachine() + " Distance in km: "
+					textResponse.append("\n ATM name: " + availableMachines.getMachine() + " Distance in km: "
 							+ availableMachines.getDistance());
 
 					System.out.println("ATM name: " + availableMachines.getMachine() + " Distance in km: "

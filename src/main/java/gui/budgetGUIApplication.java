@@ -311,7 +311,7 @@ public class budgetGUIApplication {
 					@Override
 					public void onNext(setBudget value) {
 						// for every request from client set and build response
-						textResponse.append("You Have set Budget!" + " \n" + " Catagory: " + value.getOriginalCat()
+						textResponse.append("\n You Have set Budget!" + " \n" + " Catagory: " + value.getOriginalCat()
 								+ "- Budget: " + value.getOriginalBudget());
 
 						System.out.println("You Have set Budget!" + " \n Catagory: " + value.getOriginalCat()

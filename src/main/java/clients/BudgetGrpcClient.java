@@ -1,18 +1,26 @@
-package com.bron.grpc;
+package clients;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 import javax.jmdns.ServiceInfo;
 
+import com.bron.grpc.BudgetGrpc;
+import com.bron.grpc.lowBudgetAlert;
+import com.bron.grpc.moneySpent;
+import com.bron.grpc.requestRemainingbudget;
+import com.bron.grpc.setBudget;
+import com.bron.grpc.updatedBudget;
+import com.bron.grpc.updatedBudgetConfirmation;
 import com.bron.grpc.BudgetGrpc.BudgetBlockingStub;
+import com.bron.grpc.BudgetGrpc.BudgetStub;
 
 import JMDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
-public class MyClient {
+public class BudgetGrpcClient {
 
 	public static void main(String[] args) {
 
@@ -26,8 +34,8 @@ public class MyClient {
 		serviceInfo = SimpleServiceDiscovery.run(service_type);
 		int port = serviceInfo.getPort();
 		String host = "LocalHost";
-	
-		MyClient main = new MyClient();
+
+		BudgetGrpcClient main = new BudgetGrpcClient();
 		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 		// main.run();
 
@@ -38,38 +46,36 @@ public class MyClient {
 		channel.shutdown();
 	}
 
-
-
 	private void doClientStreamingCall(ManagedChannel channel) {
-		
-		//create async stub
-		//blocking stub won't work 
+
+		// create async stub
+		// blocking stub won't work
 		BudgetGrpc.BudgetStub asyncClient = BudgetGrpc.newStub(channel);
-		//create response observer 
+		// create response observer
 		StreamObserver<updatedBudgetConfirmation> responseObserver = new StreamObserver<updatedBudgetConfirmation>() {
 
 			@Override
-			//we get only one response from server 
+			// we get only one response from server
 			public void onNext(updatedBudgetConfirmation msg) {
 				System.out.println("receiving updated budget " + msg.getCat());
 			}
 
 			@Override
-			//we get an error from the server
+			// we get an error from the server
 			public void onError(Throwable t) {
 				t.printStackTrace();
 			}
 
 			@Override
-			//the server is done sending data
-			//onCompleted is called right after onNext
+			// the server is done sending data
+			// onCompleted is called right after onNext
 			public void onCompleted() {
 				System.out.println("Stream is completed");
 			}
 
 		};
-		
-		//build messages
+
+		// build messages
 		StreamObserver<updatedBudget> requestObserver = asyncClient.updateBugdet(responseObserver);
 		try {
 			requestObserver
@@ -88,7 +94,7 @@ public class MyClient {
 			Thread.sleep(500);
 
 			// End of requests
-			//receive response from server
+			// receive response from server
 			requestObserver.onCompleted();
 
 			Thread.sleep(10000);
@@ -116,7 +122,7 @@ public class MyClient {
 			System.out.println(remainingBudgetStream.getCat() + " Budget: " + remainingBudgetStream.getBudget());
 
 		});
-		
+
 		channel.shutdown();
 
 	}
@@ -140,20 +146,19 @@ public class MyClient {
 	}
 
 	private void doBiDiStreamingCall(ManagedChannel channel) {
-		
-		//create async stub
-		//blocking stub won't work 
+
+		// create async stub
+		// blocking stub won't work
 
 		BudgetGrpc.BudgetStub asyncClient = BudgetGrpc.newStub(channel);
-		
-		//using a CountDownLatch to sleep instead
+
+		// using a CountDownLatch to sleep instead
 		CountDownLatch latch = new CountDownLatch(1);
-		
 
 		StreamObserver<setBudget> responseObserver = new StreamObserver<setBudget>() {
 			@Override
 			public void onNext(setBudget value) {
-				//for every request from client set and build response
+				// for every request from client set and build response
 				System.out.println("You Have set Budget!" + " \n Catagory: " + value.getOriginalCat() + "- Budget: "
 						+ value.getOriginalBudget());
 
@@ -172,12 +177,12 @@ public class MyClient {
 			}
 
 		};
-		
-		//return request observer 
+
+		// return request observer
 		StreamObserver<setBudget> requestObserver = asyncClient.setBudget(responseObserver);
-		//every time we receive a request from server, send back a reponse
+		// every time we receive a request from server, send back a reponse
 		try {
-			//construct request
+			// construct request
 			requestObserver.onNext(setBudget.newBuilder().setOriginalCat("EatingOut").setOriginalBudget(99).build());
 			requestObserver.onNext(setBudget.newBuilder().setOriginalCat("Clothes").setOriginalBudget(100).build());
 			requestObserver.onNext(setBudget.newBuilder().setOriginalCat("Groceries").setOriginalBudget(87).build());

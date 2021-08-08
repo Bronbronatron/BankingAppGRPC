@@ -1,12 +1,18 @@
-package com.bron.grpc;
+package clients;
 
 import javax.jmdns.ServiceInfo;
+
+import com.bron.grpc.authenticationMessage;
+import com.bron.grpc.inputPin;
+import com.bron.grpc.searchATM;
+import com.bron.grpc.touchFreeATMGrpc;
+import com.bron.grpc.touchFreeATMGrpc.touchFreeATMBlockingStub;
 
 import JMDNS.SimpleServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class TouchFreeClient {
+public class TouchFreeGrpcClient {
 
 	public static void main(String[] args) {
 
@@ -22,31 +28,20 @@ public class TouchFreeClient {
 		int port_2 = serviceInfo.getPort();
 
 		String host_2 = "LocalHost";
-		// int port = 9098;
 
-		TouchFreeClient touch = new TouchFreeClient();
+		TouchFreeGrpcClient touch = new TouchFreeGrpcClient();
 		ManagedChannel TouchChannel = ManagedChannelBuilder.forAddress(host_2, port_2).usePlaintext().build();
-
-		
-		//Obsolete 
-		// touch.run();
-		// }
-		// private void run() {
-		
-		//Call methods 
-	//	touch.doTouchFreeUnaryCall(TouchChannel);
 		touch.doServerStreamingCall(TouchChannel);
+		TouchChannel.shutdown();
 
 	}
 
 	private void doTouchFreeUnaryCall(ManagedChannel channel) {
-		
-		
 
-		//generate blocking stub  
+		// generate blocking stub
 		touchFreeATMGrpc.touchFreeATMBlockingStub TouchFreeStub = touchFreeATMGrpc.newBlockingStub(channel);
 
-		//build request
+		// build request
 		inputPin pin = inputPin.newBuilder().setPinNumber(1111).build();
 
 		// call rpc and get back a response
@@ -61,15 +56,15 @@ public class TouchFreeClient {
 
 		// generate blocking stub
 		touchFreeATMGrpc.touchFreeATMBlockingStub TouchFreeStub = touchFreeATMGrpc.newBlockingStub(channel);
-		
-		
-		//build request
+
+		// build request
 		searchATM Search = searchATM.newBuilder().setSearchATM(true).build();
-		
-		//For each machine found print name and distance from user
+
+		// For each machine found print name and distance from user
 		TouchFreeStub.findNearByATM(Search).forEachRemaining(availableMachines -> {
 
-			System.out.println( "ATM name: " + availableMachines.getMachine() + " Distance in km: " + availableMachines.getDistance());
+			System.out.println("ATM name: " + availableMachines.getMachine() + " Distance in km: "
+					+ availableMachines.getDistance());
 
 		});
 		channel.shutdown();
